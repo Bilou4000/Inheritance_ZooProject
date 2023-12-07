@@ -13,6 +13,7 @@ TagManager:
   - Octopus
   - Turtle
   - Fish
+  - Food
   layers:
   - Default
   - TransparentFX

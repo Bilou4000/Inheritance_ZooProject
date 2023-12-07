@@ -11,7 +11,7 @@ public class AnimalScript : MonoBehaviour
 
     public GameObject nameOfAnimal;
     public GameObject canva;
-    public GameObject foodPanel;
+    //public GameObject foodPanel;
     public GameObject drinkBar;
     public GameObject foodBar;
 
@@ -58,7 +58,7 @@ public class AnimalScript : MonoBehaviour
     protected virtual void Start()
     {
         Time.timeScale = 1;
-        foodPanel.SetActive(false);
+        //foodPanel.SetActive(false);
 
         baseColor = spriteRenderer.color;
         getTired = Random.Range(0.5f, 5);
@@ -217,8 +217,7 @@ public class AnimalScript : MonoBehaviour
     {
         if(state != StateOfAnimal.Sleep && state != StateOfAnimal  .Drinking)
         {
-            Time.timeScale = 0;
-            foodPanel.SetActive(true);
+            state = StateOfAnimal.Eating;
         }     
     }
 
@@ -256,53 +255,53 @@ public class AnimalScript : MonoBehaviour
         drinkingWater = false;
     }
 
-    public void Fish()
-    {
-        food = TypeOfFood.Fish;
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void Fish()
+    //{
+    //    food = TypeOfFood.Fish;
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void Mollusc()
-    {
-        food = TypeOfFood.Mollusc;
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void Mollusc()
+    //{
+    //    food = TypeOfFood.Mollusc;
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void Seed()
-    {
-        food = TypeOfFood.Seed;
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void Seed()
+    //{
+    //    food = TypeOfFood.Seed;
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void Grass()
-    {
-        food = TypeOfFood.Grass;
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void Grass()
+    //{
+    //    food = TypeOfFood.Grass;
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void Meat()
-    {
-        food = TypeOfFood.Meat;
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void Meat()
+    //{
+    //    food = TypeOfFood.Meat;
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void RandomFood()
-    {
-        food = (TypeOfFood)Random.Range(0,6);
-        state = StateOfAnimal.Eating;
-        foodPanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void RandomFood()
+    //{
+    //    food = (TypeOfFood)Random.Range(0,6);
+    //    state = StateOfAnimal.Eating;
+    //    foodPanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
     public enum TypeOfFood
     {
