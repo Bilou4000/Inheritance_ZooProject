@@ -23,17 +23,17 @@ public class Crocodile : OviparusColdBlooded
         switch (food)
         {
             case TypeOfFood.Meat:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Fish:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     if (feed == true)
                     {
-                        state = (State)Random.Range(0, 2);
+                        state = (StateOfAnimal)Random.Range(0, 2);
                         Debug.Log("I'm not in the mood right now");
                     }
 
@@ -41,11 +41,11 @@ public class Crocodile : OviparusColdBlooded
                 }
                 break;
             case TypeOfFood.Mollusc:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     if (feed == true)
                     {
-                        state = (State)Random.Range(0, 2);
+                        state = (StateOfAnimal)Random.Range(0, 2);
                         Debug.Log("That food is disgusting");
                     }
 
@@ -53,11 +53,11 @@ public class Crocodile : OviparusColdBlooded
                 }
                 break;
             case TypeOfFood.Seed:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     if (feed == true)
                     {
-                        state = (State)Random.Range(0, 2);
+                        state = (StateOfAnimal)Random.Range(0, 2);
                         Debug.Log("Is this poison ?");
                     }
 
@@ -65,11 +65,11 @@ public class Crocodile : OviparusColdBlooded
                 }
                 break;
             case TypeOfFood.Grass:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     if (feed == true)
                     {
-                        state = (State)Random.Range(0, 2);
+                        state = (StateOfAnimal)Random.Range(0, 2);
                         Debug.Log("Do you want to kill me ?");
                     }
 
@@ -78,11 +78,11 @@ public class Crocodile : OviparusColdBlooded
                 }
                 break;
             case TypeOfFood.Everything:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     if (feed == true)
                     {
-                        state = (State)Random.Range(0, 2);
+                        state = (StateOfAnimal)Random.Range(0, 2);
                         Debug.Log("What even is this");
                     }
 

@@ -24,13 +24,14 @@ public class AnimalScript : MonoBehaviour
     private TMP_Text textOfAnimal;
     private protected SpriteRenderer spriteRenderer;
     private Color baseColor;
-
-    public string name;
+    
     public float age;
     private protected float getTired;
     private protected float moveSpeed, chillSpeed, startmoveSpeed, startchillSpeed;
     private protected bool feed = false, isSleeping = false, drinkingWater = false, canMove = false;
     private protected Vector3 direction = Vector3.zero;
+    private string[] nameList = new string[] { "Minet", "Félix", "Médor", "Rex", "Moustache", "Câline", "Peluche", "Bambi", "Nala", "Simba", "Gribouille", "Choupi", "Bella", "Oscar", "Luna", "Shadow", "Lucky", "Pacha", "Milo", "Oliver", "Cookie", "Tigrou", "Minnie", "Charlie", "Lola", "Coco", "Rocky", "Chouchou", "Belle", "Snoopy", "Ziggy", "Daisy", "Mickey", "Sushi", "Gizmo", "Maya", "Dobby", "Buddy", "Pumpkin", "Mocha", "Whiskers", "Zorro", "Mochi", "Lulu", "Peanut", "Zigzag", "Pixel", "Ginger", "Felix", "Pippin", "Misty", "Blue", "Kiwi", "Snickers", "Socks", "Mango", "Cinnamon", "Rosie", "Taz", "Casper", "Marley", "Pebbles", "Twix", "Pumpkin", "Cleo", "Bubbles", "Sunny", "Pepper", "Bentley", "Jasper", "Juno", "Scooby", "Tucker", "Rusty", "Kiki", "Loki", "Tofu", "Leo", "Mochi", "Marshmallow", "Snickerdoodle", "Pixie", "Chester", "Coco", "Maddie", "Rocky", "Apollo", "Oreo", "Lily", "Noodle", "Ziggy", "Tesla" };
+    public string nameAnimal;
 
     private protected float timer;
     
@@ -48,19 +49,19 @@ public class AnimalScript : MonoBehaviour
     {
         //Debug.Log(thirst);
         instance = this;
-        spriteRenderer = GetComponent<SpriteRenderer>();    
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        age = Random.Range(1, 30);
+        nameAnimal = nameList[Random.Range(0, nameList.Length)];
     }
 
     protected virtual void Start()
     {
-        //Debug.Log(thirst);
-
         Time.timeScale = 1;
         foodPanel.SetActive(false);
 
         baseColor = spriteRenderer.color;
         getTired = Random.Range(0.5f, 5);
-        age = Random.Range(1, 30);
 
         InvokeRepeating("decreaseHunger", 1.0f, 1.0f);
         InvokeRepeating("decreaseThirst", 1.0f, 1.0f);
@@ -70,7 +71,7 @@ public class AnimalScript : MonoBehaviour
         newName.transform.SetParent(canva.transform, true);
         newName.transform.SetSiblingIndex(0);
         textOfAnimal = newName.GetComponent<TMP_Text>();
-        textOfAnimal.text = name;
+        textOfAnimal.text = nameAnimal;
 
         drink = Instantiate(drinkBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 20, 0), Quaternion.identity);
         drink.transform.SetParent(canva.transform, true);
@@ -84,8 +85,8 @@ public class AnimalScript : MonoBehaviour
 
         foodImage = foodFill.GetComponentsInChildren<Image>()[1];
 
-        //drink.SetActive(false);
-        //foodFill.SetActive(false);
+        drink.SetActive(false);
+        foodFill.SetActive(false);
 
         startmoveSpeed = moveSpeed;
         startchillSpeed = chillSpeed;

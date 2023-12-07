@@ -26,37 +26,37 @@ public class Racoon : ViviparusAnimal
         switch (food)
         {
             case TypeOfFood.Meat:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Fish:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Mollusc:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Seed:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Grass:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }
                 break;
             case TypeOfFood.Everything:
-                if (state == State.Eating)
+                if (state == StateOfAnimal.Eating)
                 {
                     Invoke("Hunger", 2f);
                 }

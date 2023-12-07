@@ -13,11 +13,11 @@ public class AnimalInfo
 [Serializable]
 public struct AnimalSave
 {
-    public string name;
-    public float hunger;
-    public float thirst;
-    public float tiredness;
+    public string nameAnimal;
+    public float age;
+    public float hunger, thirst, tiredness;
+    public float x, y, z;
 
-    public State state;
+    public StateOfAnimal state;
     public TypeOfFood food;
 }
