@@ -8,8 +8,8 @@ public class Fish : SeaAnimal
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 10;
-        chillSpeed = 5f;
+        moveSpeed = 5;
+        chillSpeed = 2f;
 
         base.Start();
         food = (TypeOfFood)Random.Range(0, 2);

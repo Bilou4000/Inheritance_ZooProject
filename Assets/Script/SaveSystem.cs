@@ -56,19 +56,6 @@ public class SaveSystem : MonoBehaviour
             animalsInfo.animals.Add(new AnimalSave() { nameAnimal = animal.nameAnimal, age = animal.age , hunger = animal.hunger, thirst = animal.thirst, tiredness = animal.tiredness, x = position.x, y = position.y, z = position.z, food = animal.food, state = animal.state });
         }
 
-        //Vector3 position = PlayerMovement.instance.transform.position;
-        //player.x = position.x;
-        //player.y = position.y;
-        //player.z = position.z;
-
-        //player.inventory.Clear();
-        //foreach (Item item in PlayerInventory.Instance.GetInventory())
-        //{
-        //    player.inventory.Add(new SaveItem() { id = item.uniqueID, spriteName = item.icon.name });
-        //    Debug.Log(item.icon.name);
-        //}
-
-
         Debug.Log(Application.persistentDataPath + "/data.save");
         string json = JsonUtility.ToJson(animalsInfo);
         if (!File.Exists(Application.persistentDataPath + "/data.save"))
