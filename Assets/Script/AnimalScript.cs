@@ -7,13 +7,20 @@ using UnityEngine.UI;
 
 public class AnimalScript : MonoBehaviour
 {
-    public Image drinkBar;
-    public Image hungerBar;
+    //public Image drinkBar;
+    //public Image hungerBar;
     public GameObject nameOfAnimal;
     public GameObject canva;
     public GameObject foodPanel;
+    public GameObject drinkBar;
+    public GameObject foodBar;
+
     private GameObject newName;
-    //private GameObject[] allAnimals;
+    private GameObject drink;
+    private GameObject foodFill;
+
+    private Image drinkImage;
+    private Image foodImage;
     private TMP_Text textOfAnimal;
     private protected SpriteRenderer spriteRenderer;
     private Color baseColor;
@@ -21,7 +28,7 @@ public class AnimalScript : MonoBehaviour
     public string name;
     public float age;
     private protected float getTired;
-    private protected float moveSpeed, chillSpeed;
+    private protected float moveSpeed, chillSpeed, startmoveSpeed, startchillSpeed;
     private protected bool feed = false, isSleeping = false, drinkingWater = false, canMove = false;
     private protected Vector3 direction = Vector3.zero;
 
@@ -40,13 +47,12 @@ public class AnimalScript : MonoBehaviour
     private void Awake()
     {
         //allAnimals = GameObject.FindGameObjectsWithTag(gameObject.tag);
-        spriteRenderer = GetComponent<SpriteRenderer>();      
+        spriteRenderer = GetComponent<SpriteRenderer>();    
     }
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-
         Time.timeScale = 1;
         foodPanel.SetActive(false);
 
@@ -63,13 +69,31 @@ public class AnimalScript : MonoBehaviour
         newName.transform.SetSiblingIndex(0);
         textOfAnimal = newName.GetComponent<TMP_Text>();
         textOfAnimal.text = name;
+
+        drink = Instantiate(drinkBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 20, 0), Quaternion.identity);
+        drink.transform.SetParent(canva.transform, true);
+        drink.transform.SetSiblingIndex(0);
+
+        drinkImage = drink.GetComponentsInChildren<Image>()[1];
+
+        foodFill = Instantiate(foodBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-15, 20, 0), Quaternion.identity);
+        foodFill.transform.SetParent(canva.transform, true);
+        foodFill.transform.SetSiblingIndex(0);
+
+        foodImage = foodFill.GetComponentsInChildren<Image>()[1];
+
+        drink.SetActive(false);
+        foodFill.SetActive(false);
+
+        startmoveSpeed = moveSpeed;
+        startchillSpeed = chillSpeed;
     }
 
     void decreaseHunger()
     {
         if (hunger > 0 && state != State.Eating && state != State.Sleep)
         {
-            hunger -= 1;
+            hunger -= 0.2f;
         }
     }
 
@@ -77,7 +101,7 @@ public class AnimalScript : MonoBehaviour
     {
         if (thirst > 0 && state != State.Drinking && state != State.Sleep)
         {
-            thirst -= 2;
+            thirst -= 0.5f;
         }
     }
 
@@ -96,11 +120,14 @@ public class AnimalScript : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        drinkBar.fillAmount = thirst / 100;
-        hungerBar.fillAmount = hunger / 100;
-        newName.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 12, 0);
+        drinkImage.fillAmount = thirst / 100;
+        foodImage.fillAmount = hunger / 100;
 
-        if(canMove == false)
+        newName.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 12, 0);
+        drink.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 30, 0);
+        foodFill.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-15, 30, 0);
+
+        if (canMove == false)
         {
             direction = new Vector3 (Random.insideUnitSphere.x, Random.insideUnitSphere.y, 0);
         }
@@ -158,6 +185,22 @@ public class AnimalScript : MonoBehaviour
             timer = 0f;
             tiredness += 15;
         }
+    }
+
+    private void OnMouseOver()
+    {
+        drink.SetActive(true);
+        foodFill.SetActive(true);
+        moveSpeed = 0;
+        chillSpeed = 0;
+    }
+
+    private void OnMouseExit()
+    {
+        drink.SetActive(false);
+        foodFill.SetActive(false);
+        moveSpeed = startmoveSpeed;
+        chillSpeed = startchillSpeed;
     }
 
     public void GiveWater()
