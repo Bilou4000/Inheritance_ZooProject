@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class AnimalScript : MonoBehaviour
 {
-    //public Image drinkBar;
-    //public Image hungerBar;
+    public static AnimalScript instance;
+
     public GameObject nameOfAnimal;
     public GameObject canva;
     public GameObject foodPanel;
@@ -34,7 +34,7 @@ public class AnimalScript : MonoBehaviour
 
     private protected float timer;
     
-    public State state;
+    public StateOfAnimal state;
     public TypeOfFood food;
     public Skeleton skeleton;
     public Blood blood;
@@ -46,13 +46,15 @@ public class AnimalScript : MonoBehaviour
 
     private void Awake()
     {
-        //allAnimals = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        //Debug.Log(thirst);
+        instance = this;
         spriteRenderer = GetComponent<SpriteRenderer>();    
     }
 
-    // Start is called before the first frame update
     protected virtual void Start()
     {
+        //Debug.Log(thirst);
+
         Time.timeScale = 1;
         foodPanel.SetActive(false);
 
@@ -82,8 +84,8 @@ public class AnimalScript : MonoBehaviour
 
         foodImage = foodFill.GetComponentsInChildren<Image>()[1];
 
-        drink.SetActive(false);
-        foodFill.SetActive(false);
+        //drink.SetActive(false);
+        //foodFill.SetActive(false);
 
         startmoveSpeed = moveSpeed;
         startchillSpeed = chillSpeed;
@@ -91,7 +93,7 @@ public class AnimalScript : MonoBehaviour
 
     void decreaseHunger()
     {
-        if (hunger > 0 && state != State.Eating && state != State.Sleep)
+        if (hunger > 0 && state != StateOfAnimal.Eating && state != StateOfAnimal.Sleep)
         {
             hunger -= 0.2f;
         }
@@ -99,7 +101,7 @@ public class AnimalScript : MonoBehaviour
 
     void decreaseThirst()
     {
-        if (thirst > 0 && state != State.Drinking && state != State.Sleep)
+        if (thirst > 0 && state != StateOfAnimal.Drinking && state != StateOfAnimal.Sleep)
         {
             thirst -= 0.5f;
         }
@@ -107,7 +109,7 @@ public class AnimalScript : MonoBehaviour
 
     void decreaseTiredness()
     {
-        if (state != State.Sleep)
+        if (state != StateOfAnimal.Sleep)
         {
             if (tiredness > 0)
             {
@@ -117,7 +119,6 @@ public class AnimalScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
         drinkImage.fillAmount = thirst / 100;
@@ -135,28 +136,28 @@ public class AnimalScript : MonoBehaviour
 
         switch (state)
         {
-            case State.MoveAround:
+            case StateOfAnimal.MoveAround:
                 canMove = true;  
                 transform.position += direction * moveSpeed * Time.deltaTime;
                 spriteRenderer.color = baseColor;
                 break;
-            case State.Chill:
+            case StateOfAnimal.Chill:
                 canMove = true;
                 transform.position += direction * chillSpeed * Time.deltaTime;
                 spriteRenderer.color = baseColor;
                 break;
-            case State.Eating:
+            case StateOfAnimal.Eating:
                 canMove = false;
                 feed = true;
                 spriteRenderer.color = new Color(255 / 255f, 51 / 255f, 51 / 255f);
                 break;
-            case State.Drinking:
+            case StateOfAnimal.Drinking:
                 canMove = false;
                 drinkingWater = true;
                 spriteRenderer.color = new Color(102 / 255f, 194 / 255f, 255 / 255f);
                 Invoke("Drink", 2f);
                 break;
-            case State.Sleep:
+            case StateOfAnimal.Sleep:
                 isSleeping = true;
                 canMove = false;
                 spriteRenderer.color = Color.black;
@@ -166,16 +167,16 @@ public class AnimalScript : MonoBehaviour
         if(tiredness >= 80 && isSleeping == true)
         {
             isSleeping = false;
-            state = (State)Random.Range(0, 2);
+            state = (StateOfAnimal)Random.Range(0, 2);
             Debug.Log("The animal have slept enough");
         }
 
         if (tiredness <= 5)
         {
-            state = State.Sleep;
+            state = StateOfAnimal.Sleep;
         }
 
-        if (state == State.Sleep)
+        if (state == StateOfAnimal.Sleep)
         {
             timer += Time.deltaTime;
         }
@@ -205,15 +206,15 @@ public class AnimalScript : MonoBehaviour
 
     public void GiveWater()
     {
-        if (state != State.Sleep && state != State.Eating)
+        if (state != StateOfAnimal.Sleep && state != StateOfAnimal.Eating)
         {
-            state = State.Drinking;
+            state = StateOfAnimal.Drinking;
         }
     }
 
     public void Feed()
     {
-        if(state != State.Sleep && state != State.Drinking)
+        if(state != StateOfAnimal.Sleep && state != StateOfAnimal  .Drinking)
         {
             Time.timeScale = 0;
             foodPanel.SetActive(true);
@@ -225,13 +226,13 @@ public class AnimalScript : MonoBehaviour
         if (hunger <= 70 && feed == true)
         {
             hunger += 30;
-            state = (State)Random.Range(0, 2);
+            state = (StateOfAnimal)Random.Range(0, 2);
             Debug.Log("That was good");
         }
         else if(hunger > 70 && feed == true)
         {
             Debug.Log("The animal can't eat more");
-            state = (State)Random.Range(0, 2);
+            state = (StateOfAnimal)Random.Range(0, 2);
         }
         feed = false;
 
@@ -243,13 +244,13 @@ public class AnimalScript : MonoBehaviour
         if (thirst <= 70 && drinkingWater == true)
         {
             thirst += 30;
-            state = (State)Random.Range(0, 2);
+            state = (StateOfAnimal)Random.Range(0, 2);
             Debug.Log("That was good");
         }
         else if (thirst > 70 && drinkingWater == true)
         {
             Debug.Log("The animal can't drink more");
-            state = (State)Random.Range(0, 2);
+            state = (StateOfAnimal)Random.Range(0, 2);
         }
         drinkingWater = false;
     }
@@ -257,7 +258,7 @@ public class AnimalScript : MonoBehaviour
     public void Fish()
     {
         food = TypeOfFood.Fish;
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -265,7 +266,7 @@ public class AnimalScript : MonoBehaviour
     public void Mollusc()
     {
         food = TypeOfFood.Mollusc;
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -273,7 +274,7 @@ public class AnimalScript : MonoBehaviour
     public void Seed()
     {
         food = TypeOfFood.Seed;
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -281,7 +282,7 @@ public class AnimalScript : MonoBehaviour
     public void Grass()
     {
         food = TypeOfFood.Grass;
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -289,7 +290,7 @@ public class AnimalScript : MonoBehaviour
     public void Meat()
     {
         food = TypeOfFood.Meat;
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -297,7 +298,7 @@ public class AnimalScript : MonoBehaviour
     public void RandomFood()
     {
         food = (TypeOfFood)Random.Range(0,6);
-        state = State.Eating;
+        state = StateOfAnimal.Eating;
         foodPanel.SetActive(false);
         Time.timeScale = 1;
     }
@@ -312,7 +313,7 @@ public class AnimalScript : MonoBehaviour
         Everything
     }
 
-    public enum State
+    public enum StateOfAnimal
     {
         Chill,
         MoveAround,
