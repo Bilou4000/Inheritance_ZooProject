@@ -11,13 +11,13 @@ public class AnimalScript : MonoBehaviour
 
     public GameObject nameOfAnimal;
     public GameObject canva;
-    //public GameObject foodPanel;
     public GameObject drinkBar;
     public GameObject foodBar;
 
     private GameObject newName;
     private GameObject drink;
     private GameObject foodFill;
+    private GameObject mouseFood;
 
     private Image drinkImage;
     private Image foodImage;
@@ -47,18 +47,16 @@ public class AnimalScript : MonoBehaviour
 
     private void Awake()
     {
-        //Debug.Log(thirst);
-        instance = this;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
         age = Random.Range(1, 30);
         nameAnimal = nameList[Random.Range(0, nameList.Length)];
+
+        instance = this;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Start()
     {
         Time.timeScale = 1;
-        //foodPanel.SetActive(false);
 
         baseColor = spriteRenderer.color;
         getTired = Random.Range(0.5f, 5);
@@ -122,8 +120,11 @@ public class AnimalScript : MonoBehaviour
 
     protected virtual void Update()
     {
+        textOfAnimal.text = nameAnimal;
+
         drinkImage.fillAmount = thirst / 100;
         foodImage.fillAmount = hunger / 100;
+
 
         newName.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 12, 0);
         drink.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 30, 0);
@@ -169,7 +170,6 @@ public class AnimalScript : MonoBehaviour
         {
             isSleeping = false;
             state = (StateOfAnimal)Random.Range(0, 2);
-            Debug.Log("The animal have slept enough");
         }
 
         if (tiredness <= 5)
@@ -205,27 +205,11 @@ public class AnimalScript : MonoBehaviour
         chillSpeed = startchillSpeed;
     }
 
-    public void GiveWater()
-    {
-        if (state != StateOfAnimal.Sleep && state != StateOfAnimal.Eating)
-        {
-            state = StateOfAnimal.Drinking;
-        }
-    }
-
-    public void Feed()
-    {
-        if(state != StateOfAnimal.Sleep && state != StateOfAnimal  .Drinking)
-        {
-            state = StateOfAnimal.Eating;
-        }     
-    }
-
     public void Hunger()
     {
-        if (hunger <= 70 && feed == true)
+        if (hunger <= 100 && feed == true)
         {
-            hunger += 30;
+            hunger += 40;
             state = (StateOfAnimal)Random.Range(0, 2);
             Debug.Log("That was good");
         }
@@ -234,16 +218,14 @@ public class AnimalScript : MonoBehaviour
             Debug.Log("The animal can't eat more");
             state = (StateOfAnimal)Random.Range(0, 2);
         }
-        feed = false;
-
-        
+        feed = false;      
     }
 
     public void Drink()
     {
-        if (thirst <= 70 && drinkingWater == true)
+        if (thirst <= 100 && drinkingWater == true)
         {
-            thirst += 30;
+            thirst += 40;
             state = (StateOfAnimal)Random.Range(0, 2);
             Debug.Log("That was good");
         }
@@ -255,53 +237,46 @@ public class AnimalScript : MonoBehaviour
         drinkingWater = false;
     }
 
-    //public void Fish()
-    //{
-    //    food = TypeOfFood.Fish;
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+    private void OnMouseDown()
+    {
+        if(ManagerScript.instance.theFood.tag == "Fish")
+        {
+            //if (state != StateOfAnimal.Sleep && state != StateOfAnimal.Eating)
+            food = TypeOfFood.Fish;
+            state = StateOfAnimal.Eating;
+        }
 
-    //public void Mollusc()
-    //{
-    //    food = TypeOfFood.Mollusc;
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+        if (ManagerScript.instance.theFood.tag == "Mollusc")
+        {
+            food = TypeOfFood.Mollusc;
+            state = StateOfAnimal.Eating;
+        }
 
-    //public void Seed()
-    //{
-    //    food = TypeOfFood.Seed;
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+        if (ManagerScript.instance.theFood.tag == "Seed")
+        {
+            food = TypeOfFood.Seed;
+            state = StateOfAnimal.Eating;
+        }
 
-    //public void Grass()
-    //{
-    //    food = TypeOfFood.Grass;
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+        if (ManagerScript.instance.theFood.tag == "Grass")
+        {
+            food = TypeOfFood.Grass;
+            state = StateOfAnimal.Eating;
+        }
 
-    //public void Meat()
-    //{
-    //    food = TypeOfFood.Meat;
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+        if (ManagerScript.instance.theFood.tag == "Meat")
+        {
+            food = TypeOfFood.Meat;
+            state = StateOfAnimal.Eating;
+        }
 
-    //public void RandomFood()
-    //{
-    //    food = (TypeOfFood)Random.Range(0,6);
-    //    state = StateOfAnimal.Eating;
-    //    foodPanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
+        if (ManagerScript.instance.theFood.tag == "Water")
+        {
+            state = StateOfAnimal.Drinking;
+        }
+
+        Destroy(ManagerScript.instance.theFood);
+    }
 
     public enum TypeOfFood
     {

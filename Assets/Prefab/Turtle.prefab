@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7590723037309007285}
   m_Layer: 0
   m_Name: Turtle
-  m_TagString: Turtle
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,13 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff671f58e2c0f64a9981ea5d57cae74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drinkBar: {fileID: 0}
-  hungerBar: {fileID: 0}
   nameOfAnimal: {fileID: 0}
   canva: {fileID: 0}
-  foodPanel: {fileID: 0}
-  name: Turtle
+  drinkBar: {fileID: 0}
+  foodBar: {fileID: 0}
   age: 0
+  nameAnimal: 
   state: 0
   food: 0
   skeleton: 0

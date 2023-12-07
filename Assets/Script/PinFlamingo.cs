@@ -6,7 +6,7 @@ using static AnimalScript;
 public class PinFlamingo : OviparusHotBlooded
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         moveSpeed = 6;
         chillSpeed = 0.2f;
@@ -17,7 +17,7 @@ public class PinFlamingo : OviparusHotBlooded
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
 

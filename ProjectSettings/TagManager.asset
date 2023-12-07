@@ -5,15 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Animal
-  - Crocodile
-  - Racoon
-  - Giraffe
-  - Flamingo
-  - Pinguin
-  - Octopus
-  - Turtle
   - Fish
-  - Food
+  - Mollusc
+  - Seed
+  - Grass
+  - Meat
+  - Water
   layers:
   - Default
   - TransparentFX

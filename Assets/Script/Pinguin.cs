@@ -6,7 +6,7 @@ using static AnimalScript;
 public class Pinguin : OviparusHotBlooded
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         moveSpeed = 5;
         chillSpeed = 1f;
@@ -17,7 +17,7 @@ public class Pinguin : OviparusHotBlooded
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
 

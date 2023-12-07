@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 127816993953626129}
   m_Layer: 0
   m_Name: PinkFlamingo
-  m_TagString: Flamingo
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,13 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a06791140a245b479c1b8c757c7e193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drinkBar: {fileID: 0}
-  hungerBar: {fileID: 0}
   nameOfAnimal: {fileID: 0}
   canva: {fileID: 0}
-  foodPanel: {fileID: 0}
-  name: Flamingo
+  drinkBar: {fileID: 0}
+  foodBar: {fileID: 0}
   age: 0
+  nameAnimal: 
   state: 0
   food: 0
   skeleton: 0

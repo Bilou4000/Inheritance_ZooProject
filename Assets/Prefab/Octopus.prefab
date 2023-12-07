@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2244622241079541276}
   m_Layer: 0
   m_Name: Octopus
-  m_TagString: Octopus
+  m_TagString: Animal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,13 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36062308e222e8f4fb2c28bbf0b0aca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drinkBar: {fileID: 0}
-  hungerBar: {fileID: 0}
   nameOfAnimal: {fileID: 0}
   canva: {fileID: 0}
-  foodPanel: {fileID: 0}
-  name: Octopus
+  drinkBar: {fileID: 0}
+  foodBar: {fileID: 0}
   age: 17
+  nameAnimal: 
   state: 0
   food: 0
   skeleton: 1

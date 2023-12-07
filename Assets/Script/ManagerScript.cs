@@ -1,38 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static AnimalScript;
 
 public class ManagerScript : MonoBehaviour
 {
-    public GameObject fish;
-    public GameObject mollusc;
-    public GameObject seed;
-    public GameObject grass;
-    public GameObject meat;
-    public GameObject water;
-
+    public static ManagerScript instance;
     public GameObject canva;
 
     private Vector3 mousePos;
-    private GameObject food;
+    public GameObject theFood;
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        instance = this;
     }
 
     private void Update()
     {
         mousePos = Input.mousePosition;
-        food.transform.position = mousePos;
+        theFood.transform.position = mousePos;
     }
 
     public void Food(GameObject foodType)
     {
-        food = Instantiate(foodType, mousePos, Quaternion.identity);
-        food.transform.SetParent(canva.transform, true);
-        food.transform.SetSiblingIndex(0);
+        theFood = Instantiate(foodType, mousePos, Quaternion.identity);
+        theFood.transform.SetParent(canva.transform, true);
+        theFood.transform.SetSiblingIndex(0);
     }
-
 }

@@ -6,7 +6,7 @@ using static AnimalScript;
 public class Giraffe : ViviparusAnimal
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         moveSpeed = 3;
         chillSpeed = 0.5f;
@@ -17,7 +17,7 @@ public class Giraffe : ViviparusAnimal
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
 

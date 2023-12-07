@@ -5,7 +5,7 @@ using UnityEngine;
 public class Crocodile : OviparusColdBlooded
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         moveSpeed = 4;
         chillSpeed = 1f;
@@ -16,7 +16,7 @@ public class Crocodile : OviparusColdBlooded
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
 

@@ -6,7 +6,6 @@ using static AnimalScript;
 [Serializable]
 public class AnimalInfo
 {
-    //public float hunger, thirst, tiredness;
     public List<AnimalSave> animals = new List<AnimalSave>();
 }
 

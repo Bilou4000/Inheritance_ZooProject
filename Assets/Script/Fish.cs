@@ -6,7 +6,7 @@ public class Fish : SeaAnimal
 {
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         moveSpeed = 5;
         chillSpeed = 2f;
@@ -18,7 +18,7 @@ public class Fish : SeaAnimal
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
 
