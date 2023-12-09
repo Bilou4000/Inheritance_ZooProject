@@ -20,7 +20,11 @@ public class ManagerScript : MonoBehaviour
     private void Update()
     {
         mousePos = Input.mousePosition;
-        theFood.transform.position = mousePos;
+        if(theFood != null)
+        {
+            theFood.transform.position = mousePos;
+        }
+        
     }
 
     public void Food(GameObject foodType)
