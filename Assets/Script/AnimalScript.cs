@@ -65,19 +65,19 @@ public class AnimalScript : MonoBehaviour
         InvokeRepeating("decreaseThirst", 1.0f, 1.0f);
         InvokeRepeating("decreaseTiredness", 1.0f, 1.0f);
 
-        newName = Instantiate(nameOfAnimal, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 12, 0), Quaternion.identity);
+        newName = Instantiate(nameOfAnimal, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 22, 0), Quaternion.identity);
         newName.transform.SetParent(canva.transform, true);
         newName.transform.SetSiblingIndex(0);
         textOfAnimal = newName.GetComponent<TMP_Text>();
         textOfAnimal.text = nameAnimal;
 
-        drink = Instantiate(drinkBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 20, 0), Quaternion.identity);
+        drink = Instantiate(drinkBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 30, 0), Quaternion.identity);
         drink.transform.SetParent(canva.transform, true);
         drink.transform.SetSiblingIndex(0);
 
         drinkImage = drink.GetComponentsInChildren<Image>()[1];
 
-        foodFill = Instantiate(foodBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-15, 20, 0), Quaternion.identity);
+        foodFill = Instantiate(foodBar, Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-15, 30, 0), Quaternion.identity);
         foodFill.transform.SetParent(canva.transform, true);
         foodFill.transform.SetSiblingIndex(0);
 
@@ -126,9 +126,9 @@ public class AnimalScript : MonoBehaviour
         foodImage.fillAmount = hunger / 100;
 
 
-        newName.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 12, 0);
-        drink.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(15, 30, 0);
-        foodFill.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-15, 30, 0);
+        newName.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(0, 30, 0);
+        drink.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(50, 80, 0);
+        foodFill.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position) + new Vector3(-50, 80, 0);
 
         if (canMove == false)
         {

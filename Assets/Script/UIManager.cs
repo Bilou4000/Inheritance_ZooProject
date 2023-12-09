@@ -6,13 +6,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject pauseMenu, deleteVerification;
 
     private bool check;
 
     private void Awake()
     {
         pauseMenu.SetActive(false);
+        deleteVerification.SetActive(false);
     }
 
     void Start()
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape) && !check)
         {
             pauseMenu.SetActive(false);
+            deleteVerification.SetActive(false);
 
             Time.timeScale = 1.0f;
             check = true;
@@ -50,5 +52,15 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void VerifDelete()
+    {
+        deleteVerification.SetActive(true);
+    }
+
+    public void DontDelete()
+    {
+        deleteVerification.SetActive(false);
     }
 }

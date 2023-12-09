@@ -1,6 +1,6 @@
 using System.IO;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -64,5 +64,21 @@ public class SaveSystem : MonoBehaviour
         }
         File.WriteAllText(Application.persistentDataPath + "/data.save", json);
 
+    }
+
+    public void DeleteFile()
+    {
+        string json = Application.persistentDataPath + "/data.save";
+
+        // check if file exists
+        if (!File.Exists(json))
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            File.Delete(json);
+            SceneManager.LoadScene(0);
+        }
     }
 }
